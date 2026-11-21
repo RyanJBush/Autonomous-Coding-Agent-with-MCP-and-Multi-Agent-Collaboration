@@ -84,7 +84,7 @@ of `RyanJBush/swarmos` as a **private** repository. All seven prepared commit ob
 were transferred through the authenticated GitHub API, with every tree and commit
 SHA checked against the local checkout. Implementation HEAD: `bd4dd2d01f90e4445524d5caa2a99ec5ed0a9305`.
 
-[GitHub Actions run 42434894375](https://github.com/RyanJBush/swarmos/actions/runs/42434894375)
+[GitHub Actions run 42434894375](https://github.com/RyanJBush/Autonomous-Coding-Agent-with-MCP-and-Multi-Agent-Collaboration/actions/runs/42434894375)
 passed all four matrix jobs: Windows and Ubuntu, each on Python 3.11 and 3.13.
 Each job completed a clean dependency installation, pytest suite, deterministic demo,
 and one-trial-per-arm memory evaluation. No workflow failures remained.
@@ -113,3 +113,36 @@ the proposed MIT license and making RyanJBush/swarmos public. The approved text
 was copied to the root LICENSE without changing its terms. This follow-up changes
 licensing and documentation only; the tested implementation remains unchanged.
 Earlier references to private visibility describe the preceding publication stage.
+
+## Repository rename and re-verification — November 21, 2026
+
+`RyanJBush/swarmos` was renamed to
+[RyanJBush/Autonomous-Coding-Agent-with-MCP-and-Multi-Agent-Collaboration](https://github.com/RyanJBush/Autonomous-Coding-Agent-with-MCP-and-Multi-Agent-Collaboration),
+which is now the canonical URL. Git history, commit SHAs and the `swarmos` package,
+CLI, database and MCP identifiers are unchanged. Sections above describe earlier
+stages under the original name and remain historical records; their results are not
+re-dated by this section.
+
+Run 42434894375 tested `bd4dd2d`. The three later documentation and media commits used
+`[skip ci]`, so `f956d12` had no CI run of its own before this update.
+
+Fresh clone of `f956d12` from the canonical URL, clean online install of the pinned
+`requirements-dev.txt` (`pip check` passed), Windows, Python 3.13.7, pytest 9.2.0:
+
+- Test suite: **48 passed, 1 skipped in 15.56 s** (the expected standalone SWARM-001 skip).
+- A second clone into the default long directory name passed the same suite
+  (48 passed, 1 skipped), a demo run, and a one-trial-per-arm evaluation.
+- `demo --memory on` twice in project `portfolio`: both completed; memory hit False, then True.
+- `list`, `inspect`, `verify` and `timeline` succeeded. After an appended byte in the exported
+  diff, `verify` exited 1 with an evidence mismatch; `export` repaired it and `verify` passed.
+- Proposal approval with the correct SHA-256 completed; an incorrect digest exited 1 before execution.
+- `evaluate --trials 3`: 3/3 successes per arm, 0 versus 3 memory hits, five steps and one
+  patch attempt per run; median execution 689.669 ms (off) and 695.629 ms (on).
+  Report `evaluation-9e39851f4c92455382ecaaaa9951aca7` stays local and ignored.
+- MCP stdio subprocess: `initialize`, `notifications/initialized`, `tools/list` (only
+  `inspect_run`) and a scoped `inspect_run` call succeeded; an unknown tool returned
+  `-32602` and `resources/list` returned `-32601`.
+
+This update changes documentation only; the tested implementation is unchanged. The
+GitHub Actions result for the commit that adds this section is recorded in its pull
+request and the repository's Actions history rather than in this file.
