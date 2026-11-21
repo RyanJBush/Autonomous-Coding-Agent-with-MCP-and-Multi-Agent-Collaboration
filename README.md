@@ -1,15 +1,38 @@
-# SwarmOS
+# Multi-Agent Coding Workflow & Execution Tracing
+
+[![tests](https://github.com/RyanJBush/Autonomous-Coding-Agent-with-MCP-and-Multi-Agent-Collaboration/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/RyanJBush/Autonomous-Coding-Agent-with-MCP-and-Multi-Agent-Collaboration/actions/workflows/ci.yml)
 
 **A bounded coding-workflow demonstrator with durable, inspectable evidence.**
+
+This repository implements the original *Autonomous Coding Agent with MCP and
+Multi-Agent Collaboration* portfolio concept as a deliberately bounded, deterministic
+workflow. The software and its Python package, CLI and database identifiers keep the
+internal name **SwarmOS** (`swarmos`).
+
+**Problem.** Agentic coding workflows are hard to trust when you cannot see which role
+did what, whether the change was actually tested, or whether recorded evidence still
+matches what happened. This project focuses on that control and evidence layer rather
+than on code generation.
 
 SwarmOS runs Planner → Implementer → Reviewer against a disposable Git repository.
 A fixed SWARM-001 patch must produce a real diff and pass the trusted acceptance
 test before the controller approves the run. SQLite records results, timed traces,
 and project-scoped advisory memory; an offline HTML timeline makes each run inspectable.
+Externally proposed operations run only after a human approves the exact proposal
+file's SHA-256 digest.
 
 This is a deterministic agent-workflow engineering MVP. It does **not** generate
 arbitrary code, use an LLM, or provide an operating-system sandbox. The planner's
 inspection action is currently a validated path acknowledgement, not semantic repo analysis.
+
+| Implemented | Not implemented |
+|---|---|
+| Fixed Planner → Implementer → Reviewer sequence with role allowlists | General autonomous code generation or LLM-driven coding |
+| One fixed patch in a disposable fixture, gated by a trusted acceptance test | Arbitrary repository modifications |
+| Human approval bound to a proposal's SHA-256 digest | Autonomous pull-request creation |
+| SQLite run history, timed traces, verifiable exports, offline timeline | Production-grade OS sandbox |
+| Project-scoped advisory memory for one task | General-purpose multi-agent orchestration |
+| Read-only MCP stdio server with one tool, `inspect_run` | MCP write access, controller execution, or full protocol conformance |
 
 ## Watch the demo
 
@@ -30,6 +53,8 @@ the reviewer deliberately uses the trusted test file in `tests/`.
 No API key, cloud account, Docker, or paid service is required.
 
 ```powershell
+git clone https://github.com/RyanJBush/Autonomous-Coding-Agent-with-MCP-and-Multi-Agent-Collaboration.git
+cd Autonomous-Coding-Agent-with-MCP-and-Multi-Agent-Collaboration
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
 .\.venv\Scripts\python.exe -m pytest tests -q
@@ -37,6 +62,8 @@ python -m venv .venv
 ```
 
 On macOS/Linux use `.venv/bin/python` instead of `.venv\Scripts\python.exe`.
+On Windows, clone under a short base directory; Git can fail to check out files when
+the full path exceeds the 260-character Windows limit.
 The CLI prints a run ID and a `timeline.html` path. Open that file in your browser.
 Run the demo again to observe a memory hit with the same five review-gated steps.
 The default is memory **off**; use a stable `--project` identifier to scope memory.
@@ -112,7 +139,7 @@ conformance or compatibility with every client is made. See [integration details
 - Trusted acceptance file integrity check, actual Git diff and pytest subprocess.
 - Transaction rollback, restart, concurrent initialization, export repair tests.
 - Project isolation, memory-off control, rejected-operation tracing, escaped HTML.
-- CI matrix for Windows/Linux and Python 3.11/3.13; [view workflow results](https://github.com/RyanJBush/swarmos/actions/workflows/ci.yml).
+- CI matrix for Windows/Linux and Python 3.11/3.13; [view workflow results](https://github.com/RyanJBush/Autonomous-Coding-Agent-with-MCP-and-Multi-Agent-Collaboration/actions/workflows/ci.yml).
 
 Read the [architecture](docs/ARCHITECTURE.md), [security boundaries](SECURITY.md),
 [validation record](docs/VALIDATION.md), and [three-minute demo](docs/DEMO.md).
@@ -120,6 +147,9 @@ Read the [architecture](docs/ARCHITECTURE.md), [security boundaries](SECURITY.md
 ## Publication status
 
 Continues checkpoint `eff728e2c3d5d1355c0271036202e034e62a0ef6`.
-Published with owner approval to the public repository [RyanJBush/swarmos](https://github.com/RyanJBush/swarmos). The seven prepared commits were transferred with identical Git hashes; the verified implementation checkpoint is `bd4dd2d`. Public visibility and MIT licensing were explicitly approved by the owner.
+Canonical repository: [RyanJBush/Autonomous-Coding-Agent-with-MCP-and-Multi-Agent-Collaboration](https://github.com/RyanJBush/Autonomous-Coding-Agent-with-MCP-and-Multi-Agent-Collaboration).
+
+Originally published with owner approval as the public repository `RyanJBush/swarmos`,
+which was later renamed to the canonical name above; Git history was not rewritten. The seven prepared commits were transferred with identical Git hashes; the verified implementation checkpoint is `bd4dd2d`. Public visibility and MIT licensing were explicitly approved by the owner.
 Generated evidence, local databases and journals, credentials, and environments
 are excluded by `.gitignore`. Licensed under the [MIT License](LICENSE), copyright 2026 Ryan Bush.
