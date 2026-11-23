@@ -152,4 +152,4 @@ Canonical repository: [RyanJBush/Autonomous-Coding-Agent-with-MCP-and-Multi-Agen
 Originally published with owner approval as the public repository `RyanJBush/swarmos`,
 which was later renamed to the canonical name above; Git history was not rewritten. The seven prepared commits were transferred with identical Git hashes; the verified implementation checkpoint is `bd4dd2d`. Public visibility and MIT licensing were explicitly approved by the owner.
 Generated evidence, local databases and journals, credentials, and environments
-are excluded by `.gitignore`. Licensed under the [MIT License](LICENSE), copyright 2026 Ryan Bush.
+are excluded by `.gitignore`. Licensed under the [MIT License](LICENSE), copyright 2026 Ryan J. Bush.
